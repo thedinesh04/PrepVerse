@@ -5,11 +5,11 @@ import React from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/Components/ui/button";
 import {
     Form,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@/Components/ui/form"
+import { Input } from "@/Components/ui/input"
 import Image from "next/image";
 import Link from "next/link";
 import {toast} from "sonner";
