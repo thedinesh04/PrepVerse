@@ -1,6 +1,6 @@
 "use server";
 
-import {db} from "@/firebase/admin";
+import { db } from "@/Firebase/admin";
 import {generateObject} from "ai";
 import {feedbackSchema} from "@/constants";
 import { google } from "@ai-sdk/google";
