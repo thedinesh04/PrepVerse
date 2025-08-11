@@ -10,7 +10,7 @@ import Agent from "@/Components/Agent";
 const Page = async ({ params} : RouteParams) => {
 
     const { id } = await params;
-    const user = getCurrentUser()
+    const user = await getCurrentUser()
     const interview = await getInterviewById(id)
     if(!interview) redirect('/')
 
