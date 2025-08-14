@@ -2,24 +2,24 @@ import React from 'react'
 import {Button} from "@/Components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import InterviewCard from "@/Components/InterviewCard";
+
 import {getCurrentUser} from "@/lib/actions/auth.action";
-import { getInterviewByUserId, getLatestInterviews} from "@/lib/actions/general.action";
+import { getInterviewsByUserId, getLatestInterviews} from "@/lib/actions/general.action";
+import InterviewCard from "@/Components/InterviewCard";
 
 
 const Page = async () => {
 
     const user = await getCurrentUser()
 
-    const [userInterviews, latestInterviews ] = await Promise.all([
-        getInterviewByUserId(user?.id!),
-        getLatestInterviews({ userId : user?.id! })
+    const [userInterviews, allInterviews ] = await Promise.all([
+        getInterviewsByUserId(user?.id),
+        getLatestInterviews({ userId : user?.id })
     ]);
     // const userInterviews = await getInterviewByUserId(user?.id!);
 
 
-    const hasPastInterviews = userInterviews?.length > 0;
-    const hasUpcomingInterviews = getLatestInterviews?.length > 0;
+    const hasPastInterviews = userInterviews?.length > 0;    const hasUpcomingInterviews = allInterviews?.length > 0;
 
     return (
         <>
@@ -47,8 +47,16 @@ const Page = async () => {
                 </h2>
                 <div className={"interviews-section"}>
                     { hasPastInterviews ? (
-                        userInterviews?.map((userInterview) => (
-                            <InterviewCard { ...userInterview} key = {userInterview.id} />
+                        userInterviews?.map((interview) => (
+                            <InterviewCard
+                                key={interview.id}
+                                userId={user?.id}
+                                interviewId={interview.id}
+                                role={interview.role}
+                                type={interview.type}
+                                techstack={interview.techstack}
+                                createdAt={interview.createdAt}
+                            />
 
                         ))) :   ( <p>You haven&apos;t taken any interviews</p>
                     )}
@@ -61,8 +69,16 @@ const Page = async () => {
                 </h2>
                 <div className={"interviews-section"}>
                     { hasUpcomingInterviews ? (
-                        latestInterviews?.map((latestInterview) => (
-                            <InterviewCard { ...latestInterview} key = {latestInterview.id} />
+                        allInterviews?.map((interview) => (
+                            <InterviewCard
+                                key={interview.id}
+                                userId={user?.id}
+                                interviewId={interview.id}
+                                role={interview.role}
+                                type={interview.type}
+                                techstack={interview.techstack}
+                                createdAt={interview.createdAt}
+                            />
 
                         ))) :   ( <p>There are no new interviews available</p>
                     )}
