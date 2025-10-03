@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+    - name: 📖 Documentation
+      url: https://github.com/thedinesh04/PrepVerse/blob/main/README.md
+      about: Check out the documentation for setup and usage guides
+    - name: 💬 Discussions
+      url: https://github.com/thedinesh04/PrepVerse/discussions
+      about: Ask questions and discuss ideas with the community
