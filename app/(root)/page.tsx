@@ -13,14 +13,17 @@ import InterviewCard from '@/Components/InterviewCard'
 const Page = async () => {
     const user = await getCurrentUser()
 
-    const [userInterviews, allInterviews] = await Promise.all([
+    const [rawUserInterviews, rawAllInterviews] = await Promise.all([
         getInterviewsByUserId(user.id),
         getLatestInterviews({ userId: user.id }),
     ])
     // const userInterviews = await getInterviewByUserId(user?.id!);
 
-    const hasPastInterviews = userInterviews?.length > 0
-    const hasUpcomingInterviews = allInterviews?.length > 0
+    const userInterviews = rawUserInterviews ?? [] // convert null to empty array
+    const allInterviews = rawAllInterviews ?? []
+
+    const hasPastInterviews = userInterviews.length > 0
+    const hasUpcomingInterviews = allInterviews.length > 0
 
     return (
         <>
